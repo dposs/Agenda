@@ -3,6 +3,7 @@ package br.com.alura.agenda.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,10 @@ import android.widget.ImageView;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import br.com.alura.agenda.BuildConfig;
 import br.com.alura.agenda.activity.helper.AlunoActivityHelper;
@@ -131,9 +136,6 @@ public class AlunoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-
-            Bitmap bitmap;
-
             switch (requestCode) {
                 case RequestCode.TAKE_PICTURE_ALUNO:
 
@@ -178,23 +180,41 @@ public class AlunoActivity extends AppCompatActivity {
                     UCrop.of(Uri.fromFile(picture), Uri.fromFile(picture))
                         .withOptions(options)
                         .withAspectRatio(width, height)
+                        .withMaxResultSize(500,500)
                         .start(AlunoActivity.this);
 
                     break;
 
                 case UCrop.REQUEST_CROP:
+                    Uri uri = UCrop.getOutput(data);
 
-                    final Uri uri = UCrop.getOutput(data);
+                    /* Reduce Picture Size
+                    Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
+
+                    int imageWidth = bitmap.getWidth();
+                    int imageHeight = bitmap.getHeight();
+
+                    int newHeight = (imageHeight * 500) / imageWidth;
+
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 500, newHeight, false);
+
+                    try {
+                        OutputStream streamPicture = new FileOutputStream(picture);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, streamPicture);
+                        streamPicture.flush();
+                        streamPicture.close();
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+
                     helper.setImage(uri);
 
                     break;
             }
         }
-    }
-
-    private static Bitmap rotateImage(Bitmap source, float angle) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }

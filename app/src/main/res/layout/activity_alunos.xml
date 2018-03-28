@@ -9,7 +9,8 @@
     <ListView
         android:id="@+id/alunos_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:divider="@drawable/list_divider"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/alunos_fab_create"

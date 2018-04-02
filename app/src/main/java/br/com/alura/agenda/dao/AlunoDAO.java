@@ -68,7 +68,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<Aluno> alunos = new ArrayList<Aluno>();
 
-        String sql = "SELECT * FROM Aluno;";
+        String sql = "SELECT * FROM Aluno";
 
         Cursor c = db.rawQuery(sql, null);
 
@@ -89,6 +89,31 @@ public class AlunoDAO extends SQLiteOpenHelper {
         c.close();
 
         return alunos;
+    }
+
+    public Aluno getByTelefone(String telefone) {
+        SQLiteDatabase db = getReadableDatabase();
+        Aluno aluno = null;
+
+        String sql = "SELECT * FROM Aluno WHERE telefone = ?";
+
+        Cursor c = db.rawQuery(sql, new String[]{telefone});
+
+        if (c.moveToNext()) {
+            aluno = new Aluno();
+
+            aluno.setId(c.getLong(c.getColumnIndex("id")));
+            aluno.setNome(c.getString(c.getColumnIndex("nome")));
+            aluno.setEndereco(c.getString(c.getColumnIndex("endereco")));
+            aluno.setTelefone(c.getString(c.getColumnIndex("telefone")));
+            aluno.setSite(c.getString(c.getColumnIndex("site")));
+            aluno.setNota(c.getDouble(c.getColumnIndex("nota")));
+            aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+        }
+
+        c.close();
+
+        return aluno;
     }
 
     private ContentValues getContentValuesFrom(Aluno aluno) {

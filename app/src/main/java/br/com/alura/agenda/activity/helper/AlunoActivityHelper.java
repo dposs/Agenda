@@ -52,7 +52,9 @@ public class AlunoActivityHelper {
         campoSite.setText(aluno.getSite());
         campoNota.setProgress(aluno.getNota().intValue());
 
-        this.setImage(aluno.getCaminhoFoto());
+        if (aluno.getCaminhoFoto() != null && !aluno.getCaminhoFoto().isEmpty()) {
+            this.setImage(aluno.getCaminhoFoto());
+        }
     }
 
     public void setImage(Uri uri) {

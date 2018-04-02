@@ -15,7 +15,6 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -66,6 +65,8 @@ public class AlunosActivity extends AppCompatActivity {
             }
         });
 
+        requestPermissions();
+
         registerForContextMenu(list);
     }
 
@@ -75,7 +76,7 @@ public class AlunosActivity extends AppCompatActivity {
         loadAlunos();
     }
 
-    @Override
+@Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
@@ -147,7 +148,7 @@ public class AlunosActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) throws SecurityException {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == RequestCode.CALL_ALUNO) {
+        if (requestCode == RequestCode.REQUEST_CALL_PHONE_PERMISSION) {
             if (permissions[0].equals(Manifest.permission.CALL_PHONE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 callAluno(selectedAluno);
             }
@@ -177,7 +178,7 @@ public class AlunosActivity extends AppCompatActivity {
         if (callPhonePermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(AlunosActivity.this,
                     new String[]{Manifest.permission.CALL_PHONE},
-                    RequestCode.CALL_ALUNO);
+                    RequestCode.REQUEST_CALL_PHONE_PERMISSION);
 
             return;
         }
@@ -200,5 +201,17 @@ public class AlunosActivity extends AppCompatActivity {
         loadAlunos();
 
         SnackbarFactory.create(AlunosActivity.this, layout, "Aluno(a) " + selectedAluno.getNome() + " removido(a) com sucesso.").show();
+    }
+
+    private void requestPermissions() {
+        int receiveSMSPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS);
+
+        if (receiveSMSPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECEIVE_SMS},
+                    RequestCode.REQUEST_RECEIVE_SMS_PERMISSION);
+
+            return;
+        }
     }
 }

@@ -2,14 +2,9 @@ package br.com.alura.agenda.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.FileProvider;
@@ -23,10 +18,6 @@ import android.widget.ImageView;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 import br.com.alura.agenda.BuildConfig;
 import br.com.alura.agenda.activity.helper.AlunoActivityHelper;
@@ -60,10 +51,11 @@ public class AlunoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        /* Remove Toolbar Title when expanded
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.aluno_collapsing_toolbar);
         final AppBarLayout appBarLayout = findViewById(R.id.aluno_app_bar);
 
-        /* Remove Toolbar Title when expanded
+
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = true;
             int scrollRange = -1;
@@ -92,6 +84,7 @@ public class AlunoActivity extends AppCompatActivity {
                 picture = new File(picturePath);
 
                 Intent intentImageCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intentImageCapture.putExtra("return-data", false);
                 intentImageCapture.putExtra(MediaStore.EXTRA_OUTPUT,
                         FileProvider.getUriForFile(AlunoActivity.this, BuildConfig.APPLICATION_ID + ".provider", picture));
 
@@ -174,8 +167,8 @@ public class AlunoActivity extends AppCompatActivity {
                     options.setShowCropGrid(false);
 
                     ImageView imageView = findViewById(R.id.aluno_foto);
-                    float height = new Float(imageView.getMeasuredHeight());
-                    float width = new Float(imageView.getMeasuredWidth());
+                    float height = imageView.getMeasuredHeight();
+                    float width = imageView.getMeasuredWidth();
 
                     UCrop.of(Uri.fromFile(picture), Uri.fromFile(picture))
                         .withOptions(options)

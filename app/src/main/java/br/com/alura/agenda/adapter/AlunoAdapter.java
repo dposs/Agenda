@@ -1,8 +1,6 @@
 package br.com.alura.agenda.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +20,14 @@ public class AlunoAdapter extends BaseAdapter {
 
     private Context context;
     private List<Aluno> alunos;
+    private int emptyPicturePadding;
 
     public AlunoAdapter(Context context, List<Aluno> alunos) {
         this.context = context;
         this.alunos = alunos;
+
+        float density = this.context.getResources().getDisplayMetrics().density;
+        this.emptyPicturePadding = (int) (10 * density + 0.5f);
     }
 
     @Override
@@ -74,6 +76,8 @@ public class AlunoAdapter extends BaseAdapter {
         if (aluno.getCaminhoFoto() != null) {
             ivFoto.setImageURI(Uri.fromFile(new File(aluno.getCaminhoFoto())));
             ivFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        } else {
+            ivFoto.setPadding(emptyPicturePadding, emptyPicturePadding, emptyPicturePadding, emptyPicturePadding);
         }
 
         return view;

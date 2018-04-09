@@ -12,16 +12,19 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.activity.util.RequestCode;
 import br.com.alura.agenda.adapter.AlunoAdapter;
+import br.com.alura.agenda.converter.AlunoConverter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.factory.SnackbarFactory;
 import br.com.alura.agenda.model.Aluno;
@@ -76,7 +79,31 @@ public class AlunosActivity extends AppCompatActivity {
         loadAlunos();
     }
 
-@Override
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_alunos, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_alunos_enviar:
+                AlunoDAO dao = new AlunoDAO(this);
+                List<Aluno> alunos = dao.getAll();
+                dao.close();
+
+                AlunoConverter converter = new AlunoConverter();
+                String alunosJSON = converter.toJSON(alunos);
+
+                Toast.makeText(this, alunosJSON, Toast.LENGTH_LONG).show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;

@@ -91,7 +91,8 @@
                     android:id="@+id/aluno_telefone"
                     android:hint="Telefone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -103,7 +104,8 @@
                     android:id="@+id/aluno_site"
                     android:hint="Site"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
 
             </android.support.design.widget.TextInputLayout>
 

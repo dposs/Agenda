@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.redmadrobot.inputmask.MaskedTextChangedListener;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 
 import br.com.alura.agenda.BuildConfig;
-import br.com.alura.agenda.activity.helper.AlunoActivityHelper;
 import br.com.alura.agenda.R;
+import br.com.alura.agenda.activity.helper.AlunoActivityHelper;
 import br.com.alura.agenda.activity.util.RequestCode;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.model.Aluno;
@@ -75,6 +77,18 @@ public class AlunoActivity extends AppCompatActivity {
                 }
             }
         });*/
+
+        final TextInputEditText tvTelefone = findViewById(R.id.aluno_telefone);
+        final MaskedTextChangedListener listener = new MaskedTextChangedListener(
+                "([00]) [00000]-[0000]",
+                true,
+                tvTelefone,
+                null,
+                null
+        );
+
+        tvTelefone.addTextChangedListener(listener);
+        tvTelefone.setOnFocusChangeListener(listener);
 
         FloatingActionButton fabCamera = findViewById(R.id.aluno_fab_camera);
         fabCamera.setOnClickListener(new View.OnClickListener() {

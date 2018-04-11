@@ -28,6 +28,8 @@ import br.com.alura.agenda.converter.AlunoConverter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.factory.SnackbarFactory;
 import br.com.alura.agenda.model.Aluno;
+import br.com.alura.agenda.task.SendAlunosTask;
+import br.com.alura.agenda.util.WebClient;
 
 public class AlunosActivity extends AppCompatActivity {
 
@@ -93,10 +95,7 @@ public class AlunosActivity extends AppCompatActivity {
                 List<Aluno> alunos = dao.getAll();
                 dao.close();
 
-                AlunoConverter converter = new AlunoConverter();
-                String alunosJSON = converter.toJSON(alunos);
-
-                Toast.makeText(this, alunosJSON, Toast.LENGTH_LONG).show();
+                new SendAlunosTask(this).execute(alunos.toArray(new Aluno[]{}));
                 break;
         }
 

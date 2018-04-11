@@ -4,7 +4,6 @@
 
     <item
         android:id="@+id/menu_alunos_enviar"
-        android:title="Enviar Notas"
-        android:icon="@drawable/ic_enviar"
+        android:title="Calcular Média"
         app:showAsAction="always"/>
 </menu>

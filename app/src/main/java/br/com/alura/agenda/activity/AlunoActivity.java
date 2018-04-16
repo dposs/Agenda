@@ -192,6 +192,7 @@ public class AlunoActivity extends AppCompatActivity {
                     Uri uriCropedPicture = UCrop.getOutput(data);
 
                     /* Reduce Picture Size
+
                     Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
 
                     int imageWidth = bitmap.getWidth();

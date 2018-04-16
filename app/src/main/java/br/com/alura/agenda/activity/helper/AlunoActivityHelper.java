@@ -58,6 +58,7 @@ public class AlunoActivityHelper {
     }
 
     public void setImage(Uri uri) {
+        campoFoto.setImageURI(null);
         campoFoto.setImageURI(uri);
         campoFoto.setTag(uri.getPath());
     }

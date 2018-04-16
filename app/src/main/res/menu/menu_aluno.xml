@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_aluno_ok"
+        android:id="@+id/menu_aluno_foto"
+        android:title="Foto"
+        android:icon="@drawable/ic_photo_library_white_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_aluno_salvar"
         android:title="Ok"
         android:icon="@drawable/ic_confirmar"
         app:showAsAction="always"/>

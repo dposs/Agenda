@@ -2,6 +2,7 @@ package br.com.alura.agenda.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,12 +28,15 @@ import br.com.alura.agenda.activity.helper.AlunoActivityHelper;
 import br.com.alura.agenda.activity.util.RequestCode;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.model.Aluno;
+import br.com.alura.agenda.util.Image;
 
 public class AlunoActivity extends AppCompatActivity {
 
     private AlunoActivityHelper helper;
     private AlunoDAO alunoDAO;
     private File picture;
+
+    ImageView ivPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class AlunoActivity extends AppCompatActivity {
 
         helper = new AlunoActivityHelper(this);
         alunoDAO = new AlunoDAO(this);
+
+        String picturePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
+        picture = new File(picturePath);
+
+        ivPicture = findViewById(R.id.aluno_foto);
 
         Intent intent = getIntent();
         Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
@@ -94,9 +103,6 @@ public class AlunoActivity extends AppCompatActivity {
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String picturePath = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-                picture = new File(picturePath);
-
                 Intent intentImageCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intentImageCapture.putExtra("return-data", false);
                 intentImageCapture.putExtra(MediaStore.EXTRA_OUTPUT,
@@ -120,7 +126,7 @@ public class AlunoActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
 
-            case R.id.menu_aluno_ok:
+            case R.id.menu_aluno_salvar:
                 Aluno aluno = helper.getAluno();
 
                 if (aluno.getId() == null) {
@@ -134,6 +140,11 @@ public class AlunoActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK, new Intent().putExtra("aluno", aluno));
                 finish();
 
+                break;
+
+            case R.id.menu_aluno_foto:
+                Intent intentImagePick = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intentImagePick, RequestCode.PICK_PICTURE_ALUNO);
                 break;
         }
 
@@ -174,26 +185,11 @@ public class AlunoActivity extends AppCompatActivity {
                     }
                     */
 
-                    UCrop.Options options = new UCrop.Options();
-                    options.setToolbarColor(getResources().getColor(R.color.colorPrimary));
-                    options.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-                    options.setToolbarTitle(getResources().getString(R.string.app_name));
-                    options.setShowCropGrid(false);
-
-                    ImageView imageView = findViewById(R.id.aluno_foto);
-                    float height = imageView.getMeasuredHeight();
-                    float width = imageView.getMeasuredWidth();
-
-                    UCrop.of(Uri.fromFile(picture), Uri.fromFile(picture))
-                        .withOptions(options)
-                        .withAspectRatio(width, height)
-                        .withMaxResultSize(500,500)
-                        .start(AlunoActivity.this);
-
+                    Image.crop(this, ivPicture, Uri.fromFile(picture), Uri.fromFile(picture));
                     break;
 
                 case UCrop.REQUEST_CROP:
-                    Uri uri = UCrop.getOutput(data);
+                    Uri uriCropedPicture = UCrop.getOutput(data);
 
                     /* Reduce Picture Size
                     Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
@@ -218,7 +214,16 @@ public class AlunoActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }*/
 
-                    helper.setImage(uri);
+                    helper.setImage(uriCropedPicture);
+
+                    break;
+
+                case RequestCode.PICK_PICTURE_ALUNO:
+
+                    if (data != null && data.getData() != null) {
+                        Uri pickedImage = data.getData();
+                        Image.crop(this, ivPicture, pickedImage, Uri.fromFile(picture));
+                    }
 
                     break;
             }

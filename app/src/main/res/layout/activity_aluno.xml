@@ -50,6 +50,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/aluno_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -121,14 +122,23 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.github.clans.fab.FloatingActionButton
         android:id="@+id/aluno_fab_camera"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         android:src="@drawable/ic_camera"
+        app:fab_showAnimation="@anim/fab_scale_up"
+        app:fab_hideAnimation="@anim/fab_scale_down"
+        app:fab_size="normal"
+        app:fab_showShadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
         app:layout_anchor="@id/aluno_app_bar"
         app:layout_anchorGravity="bottom|right"
-        app:elevation="@dimen/fab_elevation"/>
+        app:fab_elevationCompat="@dimen/fab_elevation"/>
 
 </android.support.design.widget.CoordinatorLayout>

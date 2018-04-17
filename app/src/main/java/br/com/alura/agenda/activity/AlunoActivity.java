@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.FileProvider;
@@ -15,8 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
 import com.yalantis.ucrop.UCrop;
 
@@ -58,14 +61,32 @@ public class AlunoActivity extends AppCompatActivity {
             helper.setAluno(aluno);
         }
 
+        final CoordinatorLayout layout = findViewById(R.id.aluno_layout);
+        final AppBarLayout appBarLayout = findViewById(R.id.aluno_app_bar);
         final Toolbar toolbar = findViewById(R.id.aluno_toolbar);
+        final FloatingActionButton fabCamera = findViewById(R.id.aluno_fab_camera);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (appBarLayout.getHeight() / 2 < -verticalOffset) {
+                    try {
+                        fabCamera.setVisibility(View.VISIBLE);
+                        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) fabCamera.getLayoutParams();
+                        int fab_bottomMargin = layoutParams.bottomMargin;
+                        fabCamera.animate().translationY(layout.getHeight() - toolbar.getHeight() - fab_bottomMargin).setInterpolator(new LinearInterpolator()).start();
+                    } catch (Exception e) {}
+                } else {
+                    fabCamera.animate().translationY(0).setInterpolator(new LinearInterpolator()).start();
+                }
+            }
+        });
+
         /* Remove Toolbar Title when expanded
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.aluno_collapsing_toolbar);
-        final AppBarLayout appBarLayout = findViewById(R.id.aluno_app_bar);
-
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = true;
@@ -99,7 +120,6 @@ public class AlunoActivity extends AppCompatActivity {
         tvTelefone.addTextChangedListener(listener);
         tvTelefone.setOnFocusChangeListener(listener);
 
-        FloatingActionButton fabCamera = findViewById(R.id.aluno_fab_camera);
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

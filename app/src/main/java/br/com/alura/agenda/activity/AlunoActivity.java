@@ -13,6 +13,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,15 +73,13 @@ public class AlunoActivity extends AppCompatActivity {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (appBarLayout.getHeight() / 2 < -verticalOffset) {
-                    try {
-                        fabCamera.setVisibility(View.VISIBLE);
-                        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) fabCamera.getLayoutParams();
-                        int fab_bottomMargin = layoutParams.bottomMargin;
-                        fabCamera.animate().translationY(layout.getHeight() - toolbar.getHeight() - fab_bottomMargin).setInterpolator(new LinearInterpolator()).start();
-                    } catch (Exception e) {}
+
+                float range = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+
+                if (Math.abs(verticalOffset) + range >= appBarLayout.getTotalScrollRange()) {
+                    fabCamera.hide(true);
                 } else {
-                    fabCamera.animate().translationY(0).setInterpolator(new LinearInterpolator()).start();
+                    fabCamera.show(true);
                 }
             }
         });

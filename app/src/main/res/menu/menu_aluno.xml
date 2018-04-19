@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_aluno_foto"
-        android:title="Foto"
-        android:icon="@drawable/ic_photo_library_white_24dp"
+        android:id="@+id/menu_aluno_camera"
+        android:title="Câmera"
+        android:icon="@drawable/ic_photo_camera_white_24dp"
         app:showAsAction="always"/>
 
     <item

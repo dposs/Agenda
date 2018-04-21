@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import br.com.alura.agenda.MapsActivity;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.activity.util.RequestCode;
 import br.com.alura.agenda.adapter.AlunoAdapter;
@@ -87,13 +88,17 @@ public class AlunosActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_alunos_enviar:
+            case R.id.menu_alunos_send:
                 AlunoDAO dao = new AlunoDAO(this);
                 List<Aluno> alunos = dao.getAll();
                 dao.close();
 
                 new SendAlunosTask(this).execute(alunos.toArray(new Aluno[]{}));
                 break;
+
+            case R.id.menu_alunos_map:
+                Intent intentMap = new Intent(this, MapsActivity.class);
+                startActivity(intentMap);
         }
 
         return super.onOptionsItemSelected(item);

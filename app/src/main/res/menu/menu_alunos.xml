@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_alunos_enviar"
+        android:id="@+id/menu_alunos_send"
         android:title="Calcular Média"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_alunos_map"
+        android:title="Visualizar Mapa"
+        android:icon="@drawable/ic_map_white_24dp"
         app:showAsAction="always"/>
 </menu>

@@ -20,12 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleGravity="top|left"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-            app:expandedTitleMarginTop="16dp"
-            app:expandedTitleMarginStart="60dp"
             app:theme="@style/AppTheme.Toolbar"
             app:title="@string/app_name">
 
@@ -43,7 +40,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin"
+                app:titleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Shadow"
+                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

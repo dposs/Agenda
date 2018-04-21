@@ -56,21 +56,31 @@ public class AlunoAdapter extends BaseAdapter {
 
         View view = inflater.inflate(R.layout.list_item_aluno, parent, false);
 
-        LinearLayout layout = view.findViewById(R.id.item_aluno_layout);
+        LinearLayout layoutLeft = view.findViewById(R.id.item_aluno_layout_left);
+        LinearLayout layoutRight = view.findViewById(R.id.item_aluno_layout_right);
         TextView tvNome = view.findViewById(R.id.item_aluno_nome);
         TextView tvTelefone = view.findViewById(R.id.item_aluno_telefone);
+        TextView tvEndereco = view.findViewById(R.id.item_aluno_endereco);
         ImageView ivFoto = view.findViewById(R.id.item_aluno_foto);
 
         if (aluno.getNome() != null && !aluno.getNome().isEmpty()) {
             tvNome.setText(aluno.getNome());
-        } else {
-            layout.removeView(tvNome);
+        } else if (tvNome != null && layoutLeft != null) {
+            layoutLeft.removeView(tvNome);
         }
 
         if (aluno.getTelefone() != null && !aluno.getTelefone().isEmpty()) {
             tvTelefone.setText(aluno.getTelefone());
-        } else {
-            layout.removeView(tvTelefone);
+        } else if (tvTelefone != null && layoutLeft != null) {
+            layoutLeft.removeView(tvTelefone);
+        }
+
+        if (tvEndereco != null) {
+            if (aluno.getEndereco() != null && !aluno.getEndereco().isEmpty()) {
+                tvEndereco.setText(aluno.getEndereco());
+            } else if (layoutRight != null) {
+                layoutRight.removeView(tvEndereco);
+            }
         }
 
         if (aluno.getCaminhoFoto() != null) {

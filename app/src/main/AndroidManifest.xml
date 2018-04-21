@@ -36,8 +36,7 @@
         </receiver>
 
         <activity
-            android:name=".activity.AlunosActivity"
-            android:screenOrientation="portrait">
+            android:name=".activity.AlunosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +45,6 @@
         </activity>
         <activity
             android:name=".activity.AlunoActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,7 +52,6 @@
         </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!--

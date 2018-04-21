@@ -52,4 +52,21 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/item_aluno_layout_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:id="@+id/item_aluno_endereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Endereço"
+            android:gravity="right"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
 </LinearLayout>

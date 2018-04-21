@@ -17,4 +17,11 @@
         <item name="actionMenuTextColor">@color/colorTitle</item>
     </style>
 
+    <style name="TextAppearance.Design.CollapsingToolbar.Expanded.Shadow" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:shadowDy">5</item>
+        <item name="android:shadowDx">5</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowColor">@color/colorPrimary</item>
+    </style>
+
 </resources>

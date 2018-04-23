@@ -61,18 +61,23 @@ public class AlunoAdapter extends BaseAdapter {
         TextView tvNome = view.findViewById(R.id.item_aluno_nome);
         TextView tvTelefone = view.findViewById(R.id.item_aluno_telefone);
         TextView tvEndereco = view.findViewById(R.id.item_aluno_endereco);
+        TextView tvSite = view.findViewById(R.id.item_aluno_site);
         ImageView ivFoto = view.findViewById(R.id.item_aluno_foto);
 
-        if (aluno.getNome() != null && !aluno.getNome().isEmpty()) {
-            tvNome.setText(aluno.getNome());
-        } else if (tvNome != null && layoutLeft != null) {
-            layoutLeft.removeView(tvNome);
+        if (tvNome != null) {
+            if (aluno.getNome() != null && !aluno.getNome().isEmpty()) {
+                tvNome.setText(aluno.getNome());
+            } else if (layoutLeft != null) {
+                layoutLeft.removeView(tvNome);
+            }
         }
 
-        if (aluno.getTelefone() != null && !aluno.getTelefone().isEmpty()) {
-            tvTelefone.setText(aluno.getTelefone());
-        } else if (tvTelefone != null && layoutLeft != null) {
-            layoutLeft.removeView(tvTelefone);
+        if (tvTelefone != null) {
+            if (aluno.getTelefone() != null && !aluno.getTelefone().isEmpty()) {
+                tvTelefone.setText(aluno.getTelefone());
+            } else if (layoutLeft != null) {
+                layoutLeft.removeView(tvTelefone);
+            }
         }
 
         if (tvEndereco != null) {
@@ -80,6 +85,14 @@ public class AlunoAdapter extends BaseAdapter {
                 tvEndereco.setText(aluno.getEndereco());
             } else if (layoutRight != null) {
                 layoutRight.removeView(tvEndereco);
+            }
+        }
+
+        if (tvSite != null) {
+            if (aluno.getSite() != null && !aluno.getSite().isEmpty()) {
+                tvSite.setText(aluno.getSite());
+            } else if (layoutRight != null) {
+                layoutRight.removeView(tvSite);
             }
         }
 

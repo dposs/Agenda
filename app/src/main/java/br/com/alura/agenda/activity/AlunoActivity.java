@@ -2,6 +2,7 @@ package br.com.alura.agenda.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.gigamole.library.ShadowLayout;
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
 import com.yalantis.ucrop.UCrop;
 

@@ -57,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
+        android:orientation="vertical"
         android:layout_marginRight="16dp">
 
         <TextView
@@ -64,6 +65,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Endereço"
+            android:gravity="right"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/item_aluno_site"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Site"
             android:gravity="right"
             android:textSize="14sp"/>
 

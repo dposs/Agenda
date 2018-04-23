@@ -41,8 +41,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
-                app:titleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Shadow"
-                />
+                app:titleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Shadow" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

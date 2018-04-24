@@ -20,7 +20,6 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import br.com.alura.agenda.MapsActivity;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.activity.util.RequestCode;
 import br.com.alura.agenda.adapter.AlunoAdapter;
@@ -99,6 +98,12 @@ public class AlunosActivity extends AppCompatActivity {
             case R.id.menu_alunos_map:
                 Intent intentMap = new Intent(this, MapsActivity.class);
                 startActivity(intentMap);
+                break;
+
+            case R.id.menu_alunos_provas:
+                Intent intentProvas = new Intent(this, ProvasActivity.class);
+                startActivity(intentProvas);
+                break;
         }
 
         return super.onOptionsItemSelected(item);

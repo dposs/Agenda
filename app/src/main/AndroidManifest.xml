@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.alura.agenda">
 
@@ -22,7 +21,6 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -39,8 +37,7 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".activity.AlunosActivity">
+        <activity android:name=".activity.AlunosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,8 +68,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:name=".activity.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".activity.ProvasActivity"></activity>
     </application>
 
 </manifest>

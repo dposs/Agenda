@@ -12,4 +12,10 @@
         android:title="Visualizar Mapa"
         android:icon="@drawable/ic_map_white_24dp"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_alunos_provas"
+        android:title="Visualizar Provas"
+        android:icon="@drawable/ic_event_note_white_24dp"
+        app:showAsAction="always"/>
 </menu>

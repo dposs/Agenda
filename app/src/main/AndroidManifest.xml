@@ -59,7 +59,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.AlunosActivity" />
         </activity>
-        
+
         <activity android:name=".activity.ProvaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
